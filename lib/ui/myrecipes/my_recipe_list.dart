@@ -37,6 +37,29 @@ class _MyRecipeListState extends State<MyRecipeList> {
         return SizedBox(
           height: 100,
           child: Slidable(
+            endActionPane: ActionPane(
+              extentRatio: 0.25,
+              motion: const DrawerMotion(),
+              children: <Widget>[
+                SlidableAction(
+                  label: 'Delete',
+                  backgroundColor: Colors.transparent,
+                  foregroundColor: Colors.black,
+                  icon: Icons.delete,
+                  onPressed: (context) {
+                    // TODO 7
+                  },
+                ),
+                SlidableAction(
+                  label: 'Delete',
+                  backgroundColor: Colors.transparent,
+                  foregroundColor: Colors.black,
+                  onPressed: (context) {
+                    // TODO 8
+                  },
+                ),
+              ],
+            ),
             child: Card(
               elevation: 1.0,
               shape: RoundedRectangleBorder(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recipe/ui/main_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const RecipeFinder());
 }
 
