@@ -5,6 +5,7 @@ import 'package:recipe/ui/colors.dart';
 import 'package:recipe/ui/myrecipes/my_recipe_list.dart';
 import 'package:recipe/ui/recipes/recipe_list.dart';
 import 'package:recipe/ui/shopping/shopping_list.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -16,14 +17,14 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   List<Widget> pageList = <Widget>[];
-  // TODO: Add index key
+  static const String prefSelectedIndexKey = 'selectedIndex';
 
   @override
   void initState() {
     pageList.add(const RecipeList());
     pageList.add(const MyRecipeList());
     pageList.add(const ShoppingList());
-    // TODO: Call getCurrentIndex
+    getCurrentIndex();
     super.initState();
   }
 
@@ -31,7 +32,24 @@ class _MainScreenState extends State<MainScreen> {
     setState(() {
       _selectedIndex = index;
     });
-    // TODO: Call saveCurrentIndex
+    saveCurrentIndex();
+  }
+
+  void saveCurrentIndex() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setInt(prefSelectedIndexKey, _selectedIndex);
+  }
+
+  void getCurrentIndex() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey(prefSelectedIndexKey)) {
+      setState(() {
+        final index = prefs.getInt(prefSelectedIndexKey);
+        if (index != null) {
+          _selectedIndex = index;
+        }
+      });
+    }
   }
 
   @override
