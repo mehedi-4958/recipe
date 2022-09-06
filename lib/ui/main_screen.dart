@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe/ui/myrecipes/my_recipe_list.dart';
 import 'package:recipe/ui/recipes/recipe_list.dart';
 
 class MainScreen extends StatefulWidget {
@@ -16,6 +17,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     pageList.add(const RecipeList());
+    pageList.add(const MyRecipeList());
     // TODO: Call getCurrentIndex
     super.initState();
   }
