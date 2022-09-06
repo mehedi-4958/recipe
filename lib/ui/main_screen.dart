@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe/ui/myrecipes/my_recipe_list.dart';
 import 'package:recipe/ui/recipes/recipe_list.dart';
+import 'package:recipe/ui/shopping/shopping_list.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -18,6 +19,7 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     pageList.add(const RecipeList());
     pageList.add(const MyRecipeList());
+    pageList.add(const ShoppingList());
     // TODO: Call getCurrentIndex
     super.initState();
   }
