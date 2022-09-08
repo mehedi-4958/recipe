@@ -21,6 +21,8 @@ class _RecipeListState extends State<RecipeList> {
   static const String prefSearchKey = 'previousSearches';
   late TextEditingController searchTextController;
   final ScrollController _scrollController = ScrollController();
+
+  // TODO: Replace with new API class
   List currentSearchList = [];
   int currentCount = 0;
   int currentStartPosition = 0;
@@ -34,6 +36,7 @@ class _RecipeListState extends State<RecipeList> {
 
   @override
   void initState() {
+    // TODO: Remove call to loadRecipes()
     loadRecipes();
     getPreviousSearches();
     searchTextController = TextEditingController(text: '');
@@ -58,11 +61,7 @@ class _RecipeListState extends State<RecipeList> {
     super.initState();
   }
 
-  @override
-  void dispose() {
-    searchTextController.dispose();
-    super.dispose();
-  }
+  // TODO: Add getRecipeData() here
 
   void savePreviousSearches() async {
     final prefs = await SharedPreferences.getInstance();
@@ -81,11 +80,18 @@ class _RecipeListState extends State<RecipeList> {
     }
   }
 
+  // TODO: Delete LoadRecipes
   Future loadRecipes() async {
     final jsonString = await rootBundle.loadString('assets/recipes1.json');
     setState(() {
       _currentRecipes1 = APIRecipeQuery.fromJson(jsonDecode(jsonString));
     });
+  }
+
+  @override
+  void dispose() {
+    searchTextController.dispose();
+    super.dispose();
   }
 
   @override
@@ -201,7 +207,7 @@ class _RecipeListState extends State<RecipeList> {
     });
   }
 
-  // TODO: Replace method
+  // TODO: Replace this with _buildRecipeLoader definition
   Widget _buildRecipeLoader(BuildContext context) {
     if (_currentRecipes1 == null || _currentRecipes1?.hits == null) {
       return Container();
@@ -224,6 +230,7 @@ class _RecipeListState extends State<RecipeList> {
           ),
         );
       },
+      // TODO: Replace with recipeCard
       child: recipeStringCard(recipe.image, recipe.label),
     );
   }
