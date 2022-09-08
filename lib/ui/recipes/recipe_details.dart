@@ -75,6 +75,7 @@ class RecipeDetails extends StatelessWidget {
                   child: ElevatedButton.icon(
                     onPressed: () {
                       // TODO 4
+                      Navigator.pop(context);
                     },
                     icon: SvgPicture.asset(
                       'assets/images/icon_bookmark.svg',
