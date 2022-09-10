@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe/network/recipe_model.dart';
 
-// TODO: Replace with new class
 Widget recipeCard(APIRecipe recipe) {
   return Card(
     elevation: 4.0,
