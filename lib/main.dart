@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 import 'package:recipe/ui/main_screen.dart';
 
 void main() {
-  // TODO: Call _setupLogging()
+  _setupLogging();
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const RecipeFinder());
 }
 
-// TODO: Add _setupLogging()
+void _setupLogging() {
+  Logger.root.level = Level.ALL;
+  Logger.root.onRecord.listen((rec) {
+    print('Response ${rec.level.name}: ${rec.time}: ${rec.message}');
+  });
+}
 
 class RecipeFinder extends StatelessWidget {
   const RecipeFinder({Key? key}) : super(key: key);
