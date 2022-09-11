@@ -10,10 +10,10 @@ class MyRecipeList extends StatefulWidget {
 }
 
 class _MyRecipeListState extends State<MyRecipeList> {
-  // TODO 1
+  // TODO: Update recipes declaration
   List<String> recipes = [];
 
-  // TODO 2
+  // TODO: Remove initState()
   @override
   void initState() {
     recipes = <String>[];
@@ -29,11 +29,11 @@ class _MyRecipeListState extends State<MyRecipeList> {
   }
 
   Widget _buildRecipeList(BuildContext context) {
-    //TODO 3
+    //TODO: Add Consumer
     return ListView.builder(
       itemCount: recipes.length,
       itemBuilder: (BuildContext context, int index) {
-        // TODO 4
+        // TODO: Add recipe definition
         return SizedBox(
           height: 100,
           child: Slidable(
@@ -47,7 +47,7 @@ class _MyRecipeListState extends State<MyRecipeList> {
                   foregroundColor: Colors.black,
                   icon: Icons.delete,
                   onPressed: (context) {
-                    // TODO 7
+                    // TODO: Update first onTap
                   },
                 ),
                 SlidableAction(
@@ -55,7 +55,7 @@ class _MyRecipeListState extends State<MyRecipeList> {
                   backgroundColor: Colors.transparent,
                   foregroundColor: Colors.black,
                   onPressed: (context) {
-                    // TODO 8
+                    // TODO: Update second onTap
                   },
                 ),
               ],
@@ -72,14 +72,14 @@ class _MyRecipeListState extends State<MyRecipeList> {
                   padding: const EdgeInsets.all(8.0),
                   child: ListTile(
                     leading: CachedNetworkImage(
-                      // TODO 5
+                      // TODO: Replace imageUrl hardcoding
                       imageUrl:
                           'http://www.seriouseats.com/recipes/2011/12/chicken-vesuvio-recipe.html',
                       height: 120,
                       width: 60,
                       fit: BoxFit.cover,
                     ),
-                    // TODO 6
+                    // TODO: Replace title hardconding
                     title: const Text('Chicken Vesuvio'),
                   ),
                 ),
@@ -89,6 +89,8 @@ class _MyRecipeListState extends State<MyRecipeList> {
         );
       },
     );
-    // TODO 9
+    // TODO: Add final brace and parenthesis
   }
+
+  // TODO: Add deleteRecipe() here
 }

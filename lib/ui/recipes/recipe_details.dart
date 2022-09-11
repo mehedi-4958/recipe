@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:recipe/ui/colors.dart';
 
 class RecipeDetails extends StatelessWidget {
+  // TODO: Replace with new constructor
   const RecipeDetails({Key? key}) : super(key: key);
 
   @override
@@ -22,7 +23,7 @@ class RecipeDetails extends StatelessWidget {
                     Align(
                       alignment: Alignment.topLeft,
                       child: CachedNetworkImage(
-                        // TODO 1
+                        // TODO: Replace imageUrl
                         imageUrl:
                             'https://www.edamam.com/web-img/e42/e42f9119813e890af34c259785ae1cfb.jpg',
                         alignment: Alignment.topLeft,
@@ -50,7 +51,7 @@ class RecipeDetails extends StatelessWidget {
                 const Padding(
                   padding: EdgeInsets.only(left: 16.0),
                   child: Text(
-                    // TODO 2
+                    // TODO: Replace hardcoded Chicken Vesuvio
                     'Chicken Vesuvio',
                     style: TextStyle(
                       fontSize: 22,
@@ -64,7 +65,7 @@ class RecipeDetails extends StatelessWidget {
                 const Padding(
                   padding: EdgeInsets.only(left: 16.0),
                   child: Chip(
-                    // TODO 3
+                    // TODO: Replace hardcoded calories
                     label: Text('16CAL'),
                   ),
                 ),
@@ -74,7 +75,7 @@ class RecipeDetails extends StatelessWidget {
                 Center(
                   child: ElevatedButton.icon(
                     onPressed: () {
-                      // TODO 4
+                      // TODO: Add insertRecipe here
                       Navigator.pop(context);
                     },
                     icon: SvgPicture.asset(
