@@ -17,7 +17,7 @@ class _$RecipeService extends RecipeService {
   final definitionType = RecipeService;
 
   @override
-  Future<Response<Result<APIRecipeQuery>>> queryRecipe(
+  Future<Response<Result<APIRecipeQuery>>> queryRecipes(
       String query, int from, int to) {
     final $url = 'search';
     final $params = <String, dynamic>{'q': query, 'from': from, 'to': to};

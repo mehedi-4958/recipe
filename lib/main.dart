@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe/data/memory_repository.dart';
-import 'package:recipe/mock_service/mock_service.dart';
+import 'package:recipe/data/repository.dart';
+import 'package:recipe/network/recipe_service.dart';
+import 'package:recipe/network/service_interface.dart';
 import 'package:recipe/ui/main_screen.dart';
 
 Future<void> main() async {
@@ -26,14 +28,12 @@ class RecipeFinder extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        // TODO: Update ChangeNotifierProvider
-        ChangeNotifierProvider<MemoryRepository>(
+        Provider<Repository>(
           lazy: false,
           create: (_) => MemoryRepository(),
         ),
-        Provider(
-          create: (_) => MockService()..create(),
-          lazy: false,
+        Provider<ServiceInterface>(
+          create: (_) => RecipeService.create(),
         ),
       ],
       child: MaterialApp(
