@@ -1,6 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:provider/provider.dart';
+import 'package:recipe/data/memory_repository.dart';
+import 'package:recipe/data/models/models.dart';
 
 class MyRecipeList extends StatefulWidget {
   const MyRecipeList({Key? key}) : super(key: key);
@@ -10,15 +13,7 @@ class MyRecipeList extends StatefulWidget {
 }
 
 class _MyRecipeListState extends State<MyRecipeList> {
-  // TODO: Update recipes declaration
-  List<String> recipes = [];
-
-  // TODO: Remove initState()
-  @override
-  void initState() {
-    recipes = <String>[];
-    super.initState();
-  }
+  List<Recipe> recipes = [];
 
   @override
   Widget build(BuildContext context) {
@@ -29,68 +24,73 @@ class _MyRecipeListState extends State<MyRecipeList> {
   }
 
   Widget _buildRecipeList(BuildContext context) {
-    //TODO: Add Consumer
-    return ListView.builder(
-      itemCount: recipes.length,
-      itemBuilder: (BuildContext context, int index) {
-        // TODO: Add recipe definition
-        return SizedBox(
-          height: 100,
-          child: Slidable(
-            endActionPane: ActionPane(
-              extentRatio: 0.25,
-              motion: const DrawerMotion(),
-              children: <Widget>[
-                SlidableAction(
-                  label: 'Delete',
-                  backgroundColor: Colors.transparent,
-                  foregroundColor: Colors.black,
-                  icon: Icons.delete,
-                  onPressed: (context) {
-                    // TODO: Update first onTap
-                  },
-                ),
-                SlidableAction(
-                  label: 'Delete',
-                  backgroundColor: Colors.transparent,
-                  foregroundColor: Colors.black,
-                  onPressed: (context) {
-                    // TODO: Update second onTap
-                  },
-                ),
-              ],
-            ),
-            child: Card(
-              elevation: 1.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              color: Colors.white,
-              child: Align(
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ListTile(
-                    leading: CachedNetworkImage(
-                      // TODO: Replace imageUrl hardcoding
-                      imageUrl:
-                          'http://www.seriouseats.com/recipes/2011/12/chicken-vesuvio-recipe.html',
-                      height: 120,
-                      width: 60,
-                      fit: BoxFit.cover,
+    return Consumer<MemoryRepository>(
+      builder: (context, repository, child) {
+        recipes = repository.findAllRecipes();
+        return ListView.builder(
+          itemCount: recipes.length,
+          itemBuilder: (BuildContext context, int index) {
+            final recipe = recipes[index];
+            return SizedBox(
+              height: 100,
+              child: Slidable(
+                endActionPane: ActionPane(
+                  extentRatio: 0.25,
+                  motion: const DrawerMotion(),
+                  children: <Widget>[
+                    SlidableAction(
+                      label: 'Delete',
+                      backgroundColor: Colors.transparent,
+                      foregroundColor: Colors.black,
+                      icon: Icons.delete,
+                      onPressed: (context) => deleteRecipe(repository, recipe),
                     ),
-                    // TODO: Replace title hardconding
-                    title: const Text('Chicken Vesuvio'),
+                    SlidableAction(
+                      label: 'Delete',
+                      backgroundColor: Colors.transparent,
+                      foregroundColor: Colors.black,
+                      onPressed: (context) => deleteRecipe(repository, recipe),
+                    ),
+                  ],
+                ),
+                child: Card(
+                  elevation: 1.0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  color: Colors.white,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListTile(
+                        leading: CachedNetworkImage(
+                          // TODO: Replace imageUrl hardcoding
+                          imageUrl: recipe.image ?? '',
+                          height: 120,
+                          width: 60,
+                          fit: BoxFit.cover,
+                        ),
+                        title: Text(recipe.label ?? ''),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
+            );
+          },
         );
       },
     );
-    // TODO: Add final brace and parenthesis
   }
 
-  // TODO: Add deleteRecipe() here
+  void deleteRecipe(MemoryRepository repository, Recipe recipe) async {
+    if (recipe.id != null) {
+      repository.deleteRecipeIngredients(recipe.id!);
+      repository.deleteRecipe(recipe);
+      setState(() {});
+    } else {
+      print("Recipe id is null");
+    }
+  }
 }

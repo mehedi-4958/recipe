@@ -279,20 +279,23 @@ class _RecipeListState extends State<RecipeList> {
     final recipe = hits[index].recipe;
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(
-          builder: (context) {
-            final detailRecipe = Recipe(
-                label: recipe.label,
-                image: recipe.image,
-                url: recipe.url,
-                calories: recipe.calories,
-                totalTime: recipe.totalTime,
-                totalWeight: recipe.totalWeight);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              final detailRecipe = Recipe(
+                  label: recipe.label,
+                  image: recipe.image,
+                  url: recipe.url,
+                  calories: recipe.calories,
+                  totalTime: recipe.totalTime,
+                  totalWeight: recipe.totalWeight);
 
-            detailRecipe.ingredients = convertIngredients(recipe.ingredients);
-            return RecipeDetails(recipe: detailRecipe);
-          },
-        ));
+              detailRecipe.ingredients = convertIngredients(recipe.ingredients);
+              return RecipeDetails(recipe: detailRecipe);
+            },
+          ),
+        );
       },
       child: recipeCard(recipe),
     );
