@@ -5,7 +5,7 @@ import 'package:recipe/data/memory_repository.dart';
 import 'package:recipe/mock_service/mock_service.dart';
 import 'package:recipe/ui/main_screen.dart';
 
-void main() {
+Future<void> main() async {
   _setupLogging();
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const RecipeFinder());
@@ -26,6 +26,7 @@ class RecipeFinder extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        // TODO: Update ChangeNotifierProvider
         ChangeNotifierProvider<MemoryRepository>(
           lazy: false,
           create: (_) => MemoryRepository(),
