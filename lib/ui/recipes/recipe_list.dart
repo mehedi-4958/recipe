@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
+import 'package:recipe/data/models/models.dart';
 import '../widgets/custom_dropdown.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -280,7 +281,16 @@ class _RecipeListState extends State<RecipeList> {
       onTap: () {
         Navigator.push(context, MaterialPageRoute(
           builder: (context) {
-            return const RecipeDetails();
+            final detailRecipe = Recipe(
+                label: recipe.label,
+                image: recipe.image,
+                url: recipe.url,
+                calories: recipe.calories,
+                totalTime: recipe.totalTime,
+                totalWeight: recipe.totalWeight);
+
+            detailRecipe.ingredients = convertIngredients(recipe.ingredients);
+            return RecipeDetails(recipe: detailRecipe);
           },
         ));
       },
