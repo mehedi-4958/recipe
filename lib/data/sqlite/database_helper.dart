@@ -93,7 +93,7 @@ class DatabaseHelper {
     return ingredients;
   }
 
-  Future<List<Recipe>> findRecipes() async {
+  Future<List<Recipe>> findAllRecipes() async {
     final db = await instance.streamDatabase;
     final recipeList = await db.query(recipeTable);
     final recipes = parseRecipes(recipeList);
