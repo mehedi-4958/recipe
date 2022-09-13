@@ -2,6 +2,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqlbrite/sqlbrite.dart';
 import 'package:synchronized/synchronized.dart';
 
+import '../models/models.dart';
+
 class DatabaseHelper {
   static const _databaseName = 'MyRecipes.db';
   static const _databaseVersion = 1;
@@ -71,5 +73,23 @@ class DatabaseHelper {
     return _streamDatabase;
   }
 
-  // TODO: Add parseRecipe here
+  List<Recipe> parseRecipes(List<Map<String, dynamic>> recipeList) {
+    final recipes = <Recipe>[];
+    for (var recipeMap in recipeList) {
+      final recipe = Recipe.fromJson(recipeMap);
+      recipes.add(recipe);
+    }
+    return recipes;
+  }
+
+  List<Ingredient> parseIngredients(List<Map<String, dynamic>> ingredientList) {
+    final ingredients = <Ingredient>[];
+    for (var ingredientMap in ingredientList) {
+      final ingredient = Ingredient.fromJson(ingredientMap);
+      ingredients.add(ingredient);
+    }
+    return ingredients;
+  }
+
+  // TODO: Add findAppRecipes here
 }
