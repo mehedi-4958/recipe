@@ -1,5 +1,4 @@
 import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqlbrite/sqlbrite.dart';
 import 'package:synchronized/synchronized.dart';
@@ -30,6 +29,8 @@ class DatabaseHelper {
     await db.execute('''CREATE TABLE $recipeTable (
     $recipeId INTEGER PRIMARY KEY,
     label TEXT,
+    image TEXT,
+    url TEXT,
     calories REAL,
     totalWeight REAL,
     totalTime REAL
@@ -70,7 +71,7 @@ class DatabaseHelper {
     return _database!;
   }
 
-  Future<Database> get streamDatabase async {
+  Future<BriteDatabase> get streamDatabase async {
     await database;
     return _streamDatabase;
   }

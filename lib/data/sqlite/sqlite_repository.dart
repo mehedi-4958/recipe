@@ -1,6 +1,4 @@
-import 'package:recipe/data/models/ingredients.dart';
-
-import 'package:recipe/data/models/recipe.dart';
+import 'package:recipe/data/models/models.dart';
 
 import '../repository.dart';
 import 'database_helper.dart';

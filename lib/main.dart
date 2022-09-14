@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
-import 'package:recipe/data/memory_repository.dart';
 import 'package:recipe/data/repository.dart';
+import 'package:recipe/data/sqlite/sqlite_repository.dart';
 import 'package:recipe/network/recipe_service.dart';
 import 'package:recipe/network/service_interface.dart';
 import 'package:recipe/ui/main_screen.dart';
@@ -10,7 +10,9 @@ import 'package:recipe/ui/main_screen.dart';
 Future<void> main() async {
   _setupLogging();
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const RecipeFinder());
+  final repository = SqliteRepository();
+  await repository.init();
+  runApp(RecipeFinder(repository: repository));
 }
 
 void _setupLogging() {
@@ -21,7 +23,9 @@ void _setupLogging() {
 }
 
 class RecipeFinder extends StatelessWidget {
-  const RecipeFinder({Key? key}) : super(key: key);
+  const RecipeFinder({Key? key, required this.repository}) : super(key: key);
+
+  final Repository repository;
 
   // This widget is the root of your application.
   @override
@@ -30,7 +34,8 @@ class RecipeFinder extends StatelessWidget {
       providers: [
         Provider<Repository>(
           lazy: false,
-          create: (_) => MemoryRepository(),
+          create: (_) => repository,
+          dispose: (_, Repository repository) => repository.close(),
         ),
         Provider<ServiceInterface>(
           create: (_) => RecipeService.create(),
