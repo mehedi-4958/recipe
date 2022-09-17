@@ -9,16 +9,6 @@ class DriftRepository extends Repository {
   Stream<List<Ingredient>>? ingredientStream;
   Stream<List<Recipe>>? recipeStream;
 
-  // TODO: Add findAllRecipes()
-  // TODO: Add watchAllRecipes()
-  // TODO: Add watchAllIngredients()
-  // TODO: Add findRecipeById()
-  // TODO: Add findAllIngredients()
-  // TODO: Add findRecipeIngredients()
-  // TODO: Add insertRecipe()
-  // TODO: Add insertIngredients()
-  // TODO: Add Delete methods
-
   @override
   Future init() async {
     recipeDatabase = RecipeDatabase();

@@ -7,14 +7,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recipe/data/sqlite/sqlite_repository.dart';
+import 'package:recipe/data/drift/drift_repository.dart';
 
 import 'package:recipe/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    final repository = SqliteRepository();
+    final repository = DriftRepository();
     await tester.pumpWidget(RecipeFinder(repository: repository));
 
     // Verify that our counter starts at 0.
