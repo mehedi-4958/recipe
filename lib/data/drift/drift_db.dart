@@ -1,17 +1,30 @@
+import 'package:drift/drift.dart';
+import '../models/models.dart';
+
 part 'drift_db.g.dart';
 
-class DrfitRecipe extends Table
+class DriftRecipe extends Table {
+  IntColumn get id => integer().autoIncrement()();
 
-// TODO: Add DriftIngredient table definition here
+  TextColumn get label => text()();
 
-// TODO: Add @UserMoor() adn RecipeDatabase() here
+  TextColumn get image => text()();
 
-// TODO Add RecipeDao here
+  TextColumn get url => text()();
 
-// TODO: Add IngredientDao
+  RealColumn get calories => real()();
 
-// TODO: Add driftRecipeTORecipe here
+  RealColumn get totalWeight => real()();
 
-// TODO: Add driftRecipeData here
+  RealColumn get totalTime => real()();
+}
 
-// TODO: Add moorIngredientToIngredient and MoorIngredientCompanion here
+class DriftIngredient extends Table {
+  IntColumn get id => integer().autoIncrement()();
+
+  IntColumn get recipeId => integer()();
+
+  TextColumn get name => text()();
+
+  RealColumn get weight => real()();
+}
